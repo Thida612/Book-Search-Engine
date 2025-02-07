@@ -69,13 +69,25 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave: Book = searchedBooks.find((book) => book.bookId === bookId)!;
 
-    // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    
 
-    if (!token) {
+    if (!Auth.loggedIn()) {
       return false;
     }
 
+    try {
+      await saveBookMutation({
+        variables: {
+          bookData: {
+            bookId: bookToSave.bookId,
+            authors: bookToSave.authors,
+            title: bookToSave.title,
+            description: bookToSave.description,
+            image: bookToSave.image,
+          },
+        },
+      });
+    
     try {
       const response = await saveBook(bookToSave, token);
 
