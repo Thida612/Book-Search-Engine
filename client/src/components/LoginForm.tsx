@@ -33,24 +33,22 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
     }
 
     try {
-      const response = await loginUser(userFormData);
+      const { data } = await loginUser({
+        variables: { ...userFormData },
+      });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token } = await response.json();
+      const token = data.login.token;
       Auth.login(token);
+      handleModalClose();  // Close the modal after successful login
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
+ 
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
-      savedBooks: [],
     });
   };
 
