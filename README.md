@@ -20,7 +20,7 @@ This is a full-stack application that allows users to search for books using the
 
 1. Clone the repository:
    
-   git clone https://github.com/your-username/book-search-engine.git
+   git clone https://github.com/Thida612/book-search-engine.git
    cd book-search-engine
    
 
